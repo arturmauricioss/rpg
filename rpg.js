@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     characterSheet.innerHTML = `
             <div style="display: flex; flex-wrap: wrap; margin: 20px; font-family: Arial, sans-serif;">
         <div style="flex: 1 1 80px; margin: auto 10px;">
-          <img style="width:200px;height:200px;" src="${selectedRaceImagePath}" alt="${selectedRaceLabel}" title="${selectedRaceLabel}" class="selected-race-image">
+          <img style="width:200px;height:200px;border-radius:5px" src="${selectedRaceImagePath}" alt="${selectedRaceLabel}" title="${selectedRaceLabel}" class="selected-race-image">
         </div>
         <div style="flex: 1 1 120px; margin: 10px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
             <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">Dados do Personagem:</p>
