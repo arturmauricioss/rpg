@@ -231,6 +231,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedOrigin = originSelect.value;
         const selectedAlignment = alignmentSelect.value;
 
+        const selectedRaceData = raceOptions.find(race => race.value === selectedRace);
+        const selectedRaceLabel = selectedRaceData?.label || selectedRace;
+        const selectedRaceImagePath = `media/img/${selectedGender.toLowerCase()}/${selectedRace}-${selectedGender.toLowerCase()}.png`;
+        
+
         // Capturar os atributos do passo 2
         const attributes = {
             strength: parseInt(attributeInputs[0].input.value),
@@ -254,13 +259,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // Montar resumo dos dados do passo 1
    const characterSummaryStep1 = `
+   <img style="width:100px;height:100px;" src="${selectedRaceImagePath}" alt="${selectedRaceLabel}" title="${selectedRaceLabel}" class="selected-race-image">
    Nome: ${characterName}
    Raça: ${raceOptions.find(race => race.value === selectedRace)?.label || selectedRace}
    Classe: ${classOptions.find(cls => cls.value === selectedClass)?.label || selectedClass}
    Gênero: ${selectedGender}
    Origem: ${selectedOrigin}
    Alinhamento: ${alignmentTranslations[selectedAlignment] || selectedAlignment}
-`;
+   `;
 
     // Montar resumo dos atributos com modificadores
     const attributeSummary = `
@@ -275,10 +281,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exibir no elemento character-sheet no step-3
     const characterSheet = document.getElementById('character-sheet');
     characterSheet.innerHTML = `
-        <p><strong>Dados do Personagem:</strong></p>
-<pre>${characterSummaryStep1}</pre>
-        <p><strong>Atributos com Modificadores:</strong></p>
-<pre>${attributeSummary}</pre>
+            <div style="display: flex; flex-wrap: wrap; margin: 20px; font-family: Arial, sans-serif;">
+        <div style="flex: 1 1 80px; margin: auto 10px;">
+          <img style="width:200px;height:200px;" src="${selectedRaceImagePath}" alt="${selectedRaceLabel}" title="${selectedRaceLabel}" class="selected-race-image">
+        </div>
+        <div style="flex: 1 1 120px; margin: 10px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+            <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">Dados do Personagem:</p>
+            <p>Nome: ${characterName}</p>
+            <p>Raça: ${selectedRaceLabel}</p>
+            <p>Classe: ${classOptions.find(cls => cls.value === selectedClass)?.label || selectedClass}</p>
+            <p>Gênero: ${selectedGender}</p>
+            <p>Origem: ${selectedOrigin}</p>
+            <p>Alinhamento: ${alignmentTranslations[selectedAlignment] || selectedAlignment}</p>
+        </div>
+        <div style="flex: 1 1 120px; margin: 10px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+            <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">Atributos com Modificadores:</p>
+            <p>Força: ${modifiedAttributes.strength}</p>
+            <p>Destreza: ${modifiedAttributes.dexterity}</p>
+            <p>Constituição: ${modifiedAttributes.constitution}</p>
+            <p>Inteligência: ${modifiedAttributes.intelligence}</p>
+            <p>Sabedoria: ${modifiedAttributes.wisdom}</p>
+            <p>Carisma: ${modifiedAttributes.charisma}</p>
+        </div>
+    </div>
     `;
 /* <div id="character-info">
             <p><strong>Nível:</strong> <span id="level">1</span></p>
@@ -310,15 +335,15 @@ let hpMax = 100; // Valor inicial de HP máximo
 
         let hpCurrent = 100; // Valor inicial de HP atual
 
-        // Função para atualizar a barra de vida com base nos valores atuais
-        function updateHPBar() {
-            const hpPercentage = (hpCurrent / hpMax) * 100; // Calcula a porcentagem atual de HP
+        // // Função para atualizar a barra de vida com base nos valores atuais
+        // function updateHPBar() {
+        //     const hpPercentage = (hpCurrent / hpMax) * 100; // Calcula a porcentagem atual de HP
 
-            document.getElementById('current-hp').style.width = hpPercentage + '%';
-        }
+        //     document.getElementById('current-hp').style.width = hpPercentage + '%';
+        // }
 
-        // Chamada inicial para exibir corretamente
-        updateHPBar();
+        // // Chamada inicial para exibir corretamente
+        // updateHPBar();
 
         // Função para simular o aumento de nível
         function levelUp() {
@@ -423,12 +448,12 @@ function calculateXPForLevel(level) {
     }
 }
 // Atualiza o texto exibido para Nível e XP
-function updateCharacterInfo() {
-    levelElement.textContent = level;
-    xpElement.textContent = xp;
-    goldElement.textContent = gold;
-    xpBar.style.width = calculateXPPercentage() + '%';
-}
+// function updateCharacterInfo() {
+//     levelElement.textContent = level;
+//     xpElement.textContent = xp;
+//     goldElement.textContent = gold;
+//     xpBar.style.width = calculateXPPercentage() + '%';
+// }
 
 // Criar um objeto de áudio para o som de level up
 const levelUpSound = new Audio('media/audio/lvlup.mp3');
@@ -439,47 +464,47 @@ function playLevelUpSound() {
     levelUpSound.play();
 }
 
-addButton.addEventListener('click', function() {
-    const currentMonsters = monstersByLevel[level - 1];
-    const randomIndex = Math.floor(Math.random() * currentMonsters.length);
-    const selectedMonster = currentMonsters[randomIndex];
+// addButton.addEventListener('click', function() {
+//     const currentMonsters = monstersByLevel[level - 1];
+//     const randomIndex = Math.floor(Math.random() * currentMonsters.length);
+//     const selectedMonster = currentMonsters[randomIndex];
 
-    // Adiciona XP ganho pelo monstro derrotado
-    xp += selectedMonster.xp;
+//     // Adiciona XP ganho pelo monstro derrotado
+//     xp += selectedMonster.xp;
 
-    // Calcula o ouro ganho aleatoriamente dentro do intervalo do monstro e adiciona ao total de ouro
-    gold += Math.floor(Math.random() * (selectedMonster.goldMax - selectedMonster.goldMin + 1)) + selectedMonster.goldMin;
+//     // Calcula o ouro ganho aleatoriamente dentro do intervalo do monstro e adiciona ao total de ouro
+//     gold += Math.floor(Math.random() * (selectedMonster.goldMax - selectedMonster.goldMin + 1)) + selectedMonster.goldMin;
 
-    // Atualiza as informações do monstro derrotado no DOM
+//     // Atualiza as informações do monstro derrotado no DOM
 
 
-    // Verifica se o XP atual atingiu ou ultrapassou o necessário para o próximo nível
-    while (xp >= calculateXPForLevel(level)) {
-        level++;
-        playLevelUpSound();
-    }
-    const monsterInfoElement = document.createElement('li');
-    monsterInfoElement.innerHTML = `
-        <p><strong>Farmou:</strong></p>
-        <pre>
-            Monstro: ${selectedMonster.tipo}
-            XP ganho: ${selectedMonster.xp}
-            Ouro ganho: ${gold}
-        </pre>`;
+//     // Verifica se o XP atual atingiu ou ultrapassou o necessário para o próximo nível
+//     while (xp >= calculateXPForLevel(level)) {
+//         level++;
+//         playLevelUpSound();
+//     }
+//     const monsterInfoElement = document.createElement('li');
+//     monsterInfoElement.innerHTML = `
+//         <p><strong>Farmou:</strong></p>
+//         <pre>
+//             Monstro: ${selectedMonster.tipo}
+//             XP ganho: ${selectedMonster.xp}
+//             Ouro ganho: ${gold}
+//         </pre>`;
     
-    document.getElementById('character-info').appendChild(monsterInfoElement);
-    // Atualiza as informações visuais do personagem (nível, XP, barra de XP)
-    updateCharacterInfo();
-});
+//     document.getElementById('character-info').appendChild(monsterInfoElement);
+//     // Atualiza as informações visuais do personagem (nível, XP, barra de XP)
+//     updateCharacterInfo();
+// });
 
 
-function calculateXPPercentage() {
-    const currentLevelXP = calculateXPForLevel(level - 1);
-    const nextLevelXP = calculateXPForLevel(level);
-    return ((xp - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100;
-}
+// function calculateXPPercentage() {
+//     const currentLevelXP = calculateXPForLevel(level - 1);
+//     const nextLevelXP = calculateXPForLevel(level);
+//     return ((xp - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100;
+// }
 // Inicializa a exibição inicial dos dados
-updateCharacterInfo();
+// updateCharacterInfo();
     }
 
     // Função para atualizar o estado do botão "Criar Personagem"
@@ -575,11 +600,11 @@ updateCharacterInfo();
 
     // Event listener para ocultar o título quando o mouse sai da opção
     classSelect.addEventListener('mouseleave', () => {
-        console.log('Mouse deixou a opção.'); // Exemplo: mensagem de que o mouse saiu
+        // console.log('Mouse deixou a opção.'); 
     });
 
     // Inicialmente, desabilitar o botão "Criar Personagem"
-    updateCreateButtonState();
+    // updateCreateButtonState();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
