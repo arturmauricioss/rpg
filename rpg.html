@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avallon Gerador de Ficha de RPG</title>
+    <link rel="stylesheet" href="rpg.css">
+    <link rel="icon" type="image/x-icon" href="media/img/logocolorido.png">
+</head>
+<body>
+    <header>
+        <h1>The Legend of Avallon</h1>
+    </header>
+    <main>
+        <div id="custom-alert" class="alert" style="display: none;"></div>
+
+        <div class="container" id="step-1">
+            <section class="form-section">
+                <h2 style="text-align: center; color:midnightblue">Gerador de Ficha D&D v0.3</h2>
+                <form id="character-form-step-1">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="character-name">Nome:</label>
+                                <input type="text" id="character-name" name="character-name" required>
+                                <button type="button" id="generate-random-name">Gerar Nome Aleatório</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender-select">Gênero:</label>
+                                <select id="gender-select" name="gender-select" required>
+                                    <option value="" disabled selected>Escolha o Gênero</option>
+                                    <option value="Masculino" title="For +1">Masculino</option>
+                                    <option value="Feminino" title="Des +1">Feminino</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="class-select">Classe:</label>
+                                <select id="class-select" name="class-select" required>
+                                    <option value="" disabled selected>Escolha a Classe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="alignment-select">Caráter:</label>
+                                <select id="alignment-select" name="alignment-select"  required>
+                                    <option value="" disabled selected>Escolha o Alinhamento</option>
+                                    <option value="Lawful Good">Leal e Bom (LB)</option>
+                                    <option value="Neutral Good">Neutro e Bom (NB)</option>
+                                    <option value="Chaotic Good">Caótico e Bom (CB)</option>
+                                    <option value="Lawful Neutral">Leal e Neutro (LN)</option>
+                                    <option value="True Neutral">Neutro Verdadeiro (NV)</option>
+                                    <option value="Chaotic Neutral">Caótico e Neutro (CN)</option>
+                                    <option value="Lawful Evil">Leal e Mau (LM)</option>
+                                    <option value="Neutral Evil">Neutro e Mau (NM)</option>
+                                    <option value="Chaotic Evil">Caótico e Mau (CM)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="origin-select">Antepassados:</label>
+                                <select id="origin-select" name="origin-select" required>
+                                    <option value="" disabled selected>Escolha a Origem</option>
+                                    <option value="Realeza" title="Car +2">Realeza</option>
+                                    <option value="Nobreza" title="Car +1, Int +1">Nobreza</option>
+                                    <option value="Mercantilista" title="Int +2">Mercantilista</option>
+                                    <option value="Plebeu" title="Sab +2">Plebeu</option>
+                                    <option value="Escória" title="Con +2">Escória</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="race-select">Raça:</label>
+                                <div id="race-select-images" class="race-select-images">
+                                    <!-- Imagens das raças masculinas --> 
+                                    <img src="media/img/masculino/tiefling-masculino.png" title="Nefilim - Int +2, Sab +2" alt="Nefilim" data-value="tiefling" data-gender="masculino" class="race-option">
+                                    <img src="media/img/feminino/dragonborn-feminino.png" title="Dracônico - For +2, Car +1, Con +1" alt="Dracônico" data-value="dragonborn" data-gender="masculino" class="race-option">
+                                    <img src="media/img/masculino/elf-masculino.png" title="Elfo - Des +2, Sab +1, Int +1" alt="Elfo" data-value="elf" data-gender="masculino" class="race-option">
+                                    <img src="media/img/feminino/halfelf-feminino.png" title="Meio-Elfo - Car +2, Des +1, Sab +1" alt="Meio-Elfo" data-value="halfelf" data-gender="masculino" class="race-option">
+                                    <img src="media/img/masculino/human-masculino.png" title="Humano - For +1, Car +1, Int +1, Sab +1" alt="Humano" data-value="human" data-gender="masculino" class="race-option">
+                                    <img src="media/img/masculino/halforc-masculino.png" title="Meio-Orc - For +2, Con +2" alt="Meio-Orc" data-value="halforc" data-gender="masculino" class="race-option">
+                                    <img src="media/img/feminino/halfling-feminino.png" title="Hobbit - Des +2, Car +1, Sab +1" alt="Hobbit" data-value="halfling" data-gender="masculino" class="race-option"> 
+                                    <img src="media/img/masculino/dwarf-masculino.png" title="Anão - Con +2, For +1, Sab +1" alt="Anão" data-value="dwarf" data-gender="masculino" class="race-option">
+                                    <img src="media/img/feminino/gnome-feminino.png" title="Gnomo - Int +2, Con +1, Des +1" alt="Gnomo" data-value="gnome" data-gender="masculino" class="race-option">
+                                </div>
+                                
+                                <input type="hidden" id="race-select" name="race-select" required>
+                            </div>
+                            <button type="button" id="to-step-2" class="alignbutton">Próximo</button>
+                        </div>   
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="container" id="step-2" style="display:none;">
+            <section class="form-section">
+                <h2>Distribuição de Atributos</h2>
+                <form id="character-form-step-2">
+                    <div class="attributes">
+                        <div class="form-group">
+                            <label for="strength">Força:</label>
+                            <input type="text" id="strength" name="strength" readonly required>
+                            <button type="button" id="roll-strength" class="circular-button green">Rolar</button>
+                            <span id="strength-rolls" class="rolls"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dexterity">Destreza:</label>
+                            <input type="text" id="dexterity" name="dexterity" readonly required>
+                            <button type="button" id="roll-dexterity" class="circular-button green">Rolar</button>
+                            <span id="dexterity-rolls" class="rolls"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="constitution">Constituição:</label>
+                            <input type="text" id="constitution" name="constitution" readonly required>
+                            <button type="button" id="roll-constitution" class="circular-button green">Rolar</button>
+                            <span id="constitution-rolls" class="rolls"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="intelligence">Inteligência:</label>
+                            <input type="text" id="intelligence" name="intelligence" readonly required>
+                            <button type="button" id="roll-intelligence" class="circular-button green">Rolar</button>
+                            <span id="intelligence-rolls" class="rolls"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="wisdom">Sabedoria:</label>
+                            <input type="text" id="wisdom" name="wisdom" readonly required>
+                            <button type="button" id="roll-wisdom" class="circular-button green">Rolar</button>
+                            <span id="wisdom-rolls" class="rolls"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="charisma">Carisma:</label>
+                            <input type="text" id="charisma" name="charisma" readonly required>
+                            <button type="button" id="roll-charisma" class="circular-button green">Rolar</button>
+                            <span id="charisma-rolls" class="rolls"></span>
+                        </div>
+                    </div>
+                    <!-- Botão para permitir a re-rolagem dos atributos -->
+                    <button type="button" id="create-character">Criar Personagem</button>
+                </form>
+            </section>
+        </div>
+        <div class="container" id="step-3" style="display: none;">
+            <h2>Ficha do Personagem</h2>
+            <div id="character-sheet">
+                <p><strong>Dados do Personagem:</strong></p>
+                <pre id="character-summary"></pre>
+                <p><strong>Atributos com Modificadores:</strong></p>
+                <pre id="attribute-summary"></pre>
+
+                <!-- <div id="character-info">
+                    <p><strong>Nível:</strong> <span id="level">1</span></p>
+                    <p><strong>XP:</strong> <span id="xp">0</span></p>
+                    <p><strong>Gold:</strong> <span id="gold">0</span></p>
+                    <div id="xp-bar-container">
+                        <div id="xp-bar"></div>
+                    </div>
+                    <div id="hp-bar-container">
+                        <div id="hp-bar"></div>
+                    </div>
+                </div>
+                <button id="add-xp-button">Farm</button>
+                <ul id="monster-info-list"></ul> -->
+            </div>
+        </div>
+        
+    </main>
+    <footer>
+        <p>&copy; 2024 The Legend of Avallon. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="rpg.js"></script>
+</body>
+</html>

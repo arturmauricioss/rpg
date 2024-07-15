@@ -1,0 +1,227 @@
+/* Estilos gerais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    padding: 1%;
+    background-image: url('media/img/back1.jpeg');
+    background-size: cover; /* Para cobrir toda a tela */
+    background-repeat: no-repeat; /* Para evitar repetição */
+    background-attachment: fixed; /* Fixa a imagem de fundo */
+}
+
+/* Contêiner principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    padding: 5px 2%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff; /* Cor do texto no cabeçalho */
+    background-color: midnightblue; /* Cor de fundo do cabeçalho */
+    padding:1%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Conteúdo principal */
+main {
+    padding: 0%;
+}
+
+/* Botões */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Formulários e inputs */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Grades e alinhamentos */
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.row .col {
+    width: calc(50% - 10px);
+}
+
+/* Atributos e botões de rolagem */
+.attributes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Rolar números */
+.roll-number {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 2px;
+}
+
+.roll-green {
+    background-color: green;
+    color: white;
+}
+
+.roll-red {
+    background-color: red;
+    color: white;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 10px 0px;
+    border-top: 1px solid #ccc;
+    color: #3f17ac;
+    background-color: white;
+    max-width: 500px;
+    border-radius: 4px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.race-select-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1%;
+}
+
+.race-option {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.race-option.selected {
+    border: 2px solid blue; /* Escolha a cor e o estilo da borda desejados */
+}
+
+/* Layout responsivo para dispositivos móveis */
+@media (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .row .col {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .race-select-images {
+        grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    }
+
+    .race-option {
+        width: 40px;
+        height: 40px;
+    }
+}
+.alignbutton {
+    float: right;
+    margin: 50px 5% 0 5%;
+}
+
+.form-group {
+    clear: both; /* Garante que o botão não interfira com os elementos do formulário */
+}
+#xp-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    margin-top: 10px;
+}
+#xp-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4c50af;
+    transition: width 0.3s ease;
+}
+#hp-bar {
+    width: 100%;
+    height: 20px;
+    background-color: red;
+    margin-bottom: 10px;
+}
+
+#hp-bar-inner {
+    height: 100%;
+    background-color: green;
+    transition: width 0.3s ease-in-out;
+}
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8d7da;
+    color: #721c24;
+    text-align: center;
+}
